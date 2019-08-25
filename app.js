@@ -54,29 +54,29 @@ function getTasks() {
 function addTask(e) {
     if(taskInput.value === '') {
         alert("Please add a task.");
+    } else {
+        // Create li element
+        const li = document.createElement('li');
+        li.className = 'collection-item';
+        // Create textNode and append to li
+        li.appendChild(document.createTextNode(taskInput.value));
+        // Create new link element
+        const link = document.createElement('a');
+        link.className = 'delete-item secondary-content';
+        // Add fontawesome icon
+        link.innerHTML = '<i class="fa fa-remove"></i>';
+        // Append link to the li
+        li.appendChild(link);
+
+        // Append li to the ul
+        taskList.appendChild(li);
+
+        // Store task in Local Storage
+        storeTaskInLocalStorage(taskInput.value);
+
+        // Clear input
+        taskInput.value = '';
     }
-
-    // Create li element
-    const li = document.createElement('li');
-    li.className = 'collection-item';
-    // Create textNode and append to li
-    li.appendChild(document.createTextNode(taskInput.value));
-    // Create new link element
-    const link = document.createElement('a');
-    link.className = 'delete-item secondary-content';
-    // Add fontawesome icon
-    link.innerHTML = '<i class="fa fa-remove"></i>';
-    // Append link to the li
-    li.appendChild(link);
-
-    // Append li to the ul
-    taskList.appendChild(li);
-
-    // Store task in Local Storage
-    storeTaskInLocalStorage(taskInput.value);
-
-    // Clear input
-    taskInput.value = '';
 
     e.preventDefault();
 }
@@ -134,11 +134,11 @@ function clearTasks() {
     taskList.innerHTML = '';
 
     // Clear from local storage
-    cleareTasksFromLocalStorage();
+    clearTasksFromLocalStorage();
 }
 
 // Clear tasks from local storage function
-function cleareTasksFromLocalStorage() {
+function clearTasksFromLocalStorage() {
     localStorage.clear();
 }
 
